@@ -26,7 +26,6 @@ class VectorStore:
         """
         logger.info('Initializing Pinecone...')
         
-        # 初始化 Pinecone
         pinecone.init(
             api_key=api_key,
             environment=environment,
@@ -35,9 +34,7 @@ class VectorStore:
         self.index_name = index_name
         self.dimension = dimension
         
-        # 创建或获取索引
         self._init_index()
-        
         self.index = pinecone.Index(index_name)
         logger.info(f'Connected to index: {index_name}')
     
@@ -74,14 +71,12 @@ class VectorStore:
         if metadatas is None:
             metadatas = [{} for _ in texts]
         
-        # 准备向量数据
         vectors = []
         for i, (text, embedding, metadata) in enumerate(zip(texts, embeddings, metadatas)):
             vector_id = f"doc_{i}_{hash(text) % 10000}"
             metadata['text'] = text
             vectors.append((vector_id, embedding, metadata))
         
-        # 批量上传
         batch_size = 100
         for i in tqdm(range(0, len(vectors), batch_size), desc="Uploading vectors"):
             batch = vectors[i:i + batch_size]
@@ -137,7 +132,6 @@ class VectorStore:
     def delete_all(self):
         """删除所有向量"""
         logger.warning('Deleting all vectors from index')
-        # 这会删除整个索引并重新创建
         pinecone.delete_index(self.index_name)
         self._init_index()
     

@@ -97,9 +97,6 @@ class DocumentLoader:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
             
-            # 转换为 HTML 然后提取文本
-            html = markdown.markdown(content)
-            
             doc = Document(
                 page_content=content,
                 metadata={'source': file_path, 'format': 'markdown'}

@@ -6,7 +6,7 @@
 
 - 📄 **多格式文档支持**：PDF、TXT、Markdown
 - 🔍 **智能分块**：递归字符分割，支持重叠
-- 🧬 **向量化**：使用开源 embedding 模型
+- 🧠 **向量化**：使用开源 embedding 模型
 - 📚 **Pinecone 集成**：云端向量数据库，支持实时更新
 - 🤖 **Ollama 本地模型**：支持 Llama2、Mistral 等开源模型
 - 🌐 **Web UI**：Streamlit 交互界面
@@ -114,7 +114,7 @@ streamlit run app/streamlit_app.py
 
 然后访问 `http://localhost:8501`
 
-## 📚 使用示例
+## 📖 使用示例
 
 ### 基础用法
 
@@ -174,6 +174,7 @@ class RAGChain:
     def query(self, question: str, top_k: int = 3) -> str
     def query_with_sources(self, question: str, **kwargs) -> Dict
     def delete_all_data(self) -> None
+    def get_stats(self) -> Dict
 ```
 
 ### DocumentLoader
@@ -184,6 +185,7 @@ class DocumentLoader:
     def load_txt(self, file_path: str) -> List[Document]
     def load_markdown(self, file_path: str) -> List[Document]
     def load(self, file_path: str) -> List[Document]
+    def load_directory(self, dir_path: str) -> List[Document]
 ```
 
 ## 🧪 运行测试
@@ -192,7 +194,7 @@ class DocumentLoader:
 python -m pytest tests/ -v
 ```
 
-## 📊 性能调优
+## 🎯 性能调优
 
 ### 1. 优化分块大小
 

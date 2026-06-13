@@ -101,7 +101,6 @@ Answer:"""
         """
         logger.info(f'Adding {len(doc_paths)} documents...')
         
-        # 如果提供了自定义参数，更新分割器
         if chunk_size is not None or chunk_overlap is not None:
             cs = chunk_size if chunk_size is not None else self.config.CHUNK_SIZE
             co = chunk_overlap if chunk_overlap is not None else self.config.CHUNK_OVERLAP
@@ -151,7 +150,6 @@ Answer:"""
         """
         logger.info(f'Processing query: {question}')
         
-        # 检索相关文档
         if top_k is None:
             top_k = self.config.TOP_K
         
@@ -161,7 +159,6 @@ Answer:"""
             logger.warning('No relevant documents found')
             return 'No relevant information found in the knowledge base.'
         
-        # 生成答案
         logger.info('Generating answer from Ollama...')
         answer = self.qa_chain.run(
             input_documents=documents,
@@ -192,7 +189,6 @@ Answer:"""
         if top_k is None:
             top_k = self.config.TOP_K
         
-        # 检索相关文档
         docs_with_scores = self.retriever.retrieve_with_scores(question, top_k=top_k)
         
         if not docs_with_scores:
@@ -203,13 +199,11 @@ Answer:"""
         
         documents = [doc for doc, _ in docs_with_scores]
         
-        # 生成答案
         answer = self.qa_chain.run(
             input_documents=documents,
             question=question,
         )
         
-        # 准备源信息
         sources = []
         if return_sources:
             for doc, score in docs_with_scores:

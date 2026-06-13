@@ -39,16 +39,12 @@ class Retriever:
         
         logger.info(f'Retrieving top {top_k} documents for query: {query[:50]}...')
         
-        # 生成查询向量
         query_embedding = self.embedding_manager.embed_text(query)
-        
-        # 搜索相似向量
         search_results = self.vector_store.search(
             query_embedding=query_embedding,
             top_k=top_k,
         )
         
-        # 转换为 Document 对象
         documents = []
         for doc_id, score, metadata in search_results:
             text = metadata.pop('text', '')

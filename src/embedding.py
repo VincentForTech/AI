@@ -73,7 +73,6 @@ class EmbeddingManager:
         Returns:
             相似度得分（0-1）
         """
-        # 计算余弦相似度
         v1 = np.array(embedding1)
         v2 = np.array(embedding2)
         return float(np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
