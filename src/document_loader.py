@@ -1,7 +1,7 @@
 import logging
 from pathlib import Path
 from typing import List, Dict, Any
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 import markdown
 

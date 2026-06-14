@@ -1,6 +1,6 @@
 import logging
 from typing import List, Dict, Any, Optional
-from langchain.schema import Document
+from langchain_core.documents import Document
 from langchain.llms import Ollama
 from langchain.prompts import PromptTemplate
 from langchain.chains.question_answering import load_qa_chain
