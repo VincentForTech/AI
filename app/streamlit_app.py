@@ -1,8 +1,14 @@
 """Streamlit Web UI for RAG system"""
 
+import sys
+from pathlib import Path
 import streamlit as st
 import logging
-from pathlib import Path
+
+# Add project root to path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
 from src.rag_chain import RAGChain
 from config.config import Config
 
@@ -90,6 +96,7 @@ with st.sidebar:
 # Main content
 if not hasattr(st.session_state, 'rag'):
     try:
+        config = Config()
         st.session_state.rag = RAGChain(config)
     except Exception as e:
         st.error(f"Failed to initialize RAG system: {str(e)}")
@@ -146,5 +153,5 @@ st.markdown("""
 ---
 **RAG Chat System** | Powered by Ollama + Pinecone + LangChain
 
-[GitHub](https://github.com) • [Documentation](https://github.com)
+[GitHub](https://github.com/VincentForTech/AI) • [Documentation](https://github.com/VincentForTech/AI)
 """)
